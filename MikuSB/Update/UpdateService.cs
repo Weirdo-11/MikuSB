@@ -13,16 +13,16 @@ public static class UpdateService
     private static readonly Logger Logger = new("Updater");
     private static readonly bool UpdateEnabled = true;
     private static readonly bool AskBeforeUpdate = true;
-    private static readonly string RepositoryOwner = "MikuLeaks";
-    private static readonly string RepositoryName = "MikuSB";
-    private static readonly string AssetName = "MikuSB-win-x64.zip";
     private static readonly int ReleaseCheckTimeoutSeconds = 10;
     private static readonly int PackageDownloadTimeoutSeconds = 300;
     private static readonly int ResourceDownloadTimeoutSeconds = 300;
     private static readonly int ChecksumDownloadTimeoutSeconds = 30;
-    private static readonly string ResourceArchiveUrl =
-        "https://github.com/Kei-Luna/MikuSB-Resource/archive/refs/heads/main.zip";
-    private static readonly string[] RequiredResourceFiles =
+
+    private static string RepositoryOwner => ConfigManager.Config.Update.RepositoryOwner;
+    private static string RepositoryName => ConfigManager.Config.Update.RepositoryName;
+    private static string AssetName => ConfigManager.Config.Update.AssetName;
+    private static string ResourceArchiveUrl => ConfigManager.Config.Update.ResourceArchiveUrl;
+    private static string[] RequiredResourceFiles =
     [
         "card.json",
         "weapon.json"

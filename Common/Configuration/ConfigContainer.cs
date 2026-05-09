@@ -9,6 +9,8 @@ public class ConfigContainer
     public PathConfig Path { get; set; } = new();
     public ServerOption ServerOption { get; set; } = new();
     public ProxyOptions Proxy { get; set; } = new();
+
+    public UpdateConfig Update { get; set; } = new();
 }
 
 public class HttpServerConfig
@@ -92,4 +94,12 @@ public class ProxyOptions
     public bool ManageSystemProxy { get; set; } = true;
     public bool RestoreSystemProxyOnStop { get; set; } = true;
     public string ProxyOverride { get; set; } = "localhost;127.*;10.*;192.168.*;<local>";
+}
+
+public sealed class UpdateConfig
+{
+    public string RepositoryOwner { get; set; } = "";
+    public string RepositoryName { get; set; } = "";
+    public string AssetName { get; set; } = "";
+    public string ResourceArchiveUrl { get; set; } = "";
 }
