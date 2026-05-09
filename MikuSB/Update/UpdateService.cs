@@ -22,6 +22,8 @@ public static class UpdateService
     private static string RepositoryName => ConfigManager.Config.Update.RepositoryName;
     private static string AssetName => ConfigManager.Config.Update.AssetName;
     private static string ResourceArchiveUrl => ConfigManager.Config.Update.ResourceArchiveUrl;
+
+    private static string ResourceArchiveName => ConfigManager.Config.Update.ResourceArchiveName;
     private static string[] RequiredResourceFiles =
     [
         "card.json",
@@ -84,8 +86,9 @@ public static class UpdateService
             Logger.Info($"Downloading update {release.TagName}.");
             await DownloadFileAsync(client, asset.DownloadUrl, packagePath, PackageDownloadTimeoutSeconds);
 
-            var resourcePackagePath = Path.Combine(tempRoot, "MikuSB-Resource-main.zip");
+            var resourcePackagePath = Path.Combine(tempRoot, ResourceArchiveName);
             Logger.Info("Downloading resource package.");
+            Logger.Info($"resourcePackagePath {resourcePackagePath}");
             await DownloadFileAsync(client, ResourceArchiveUrl, resourcePackagePath, ResourceDownloadTimeoutSeconds);
 
             var checksumAsset = release.Assets.FirstOrDefault(x =>
@@ -135,6 +138,7 @@ public static class UpdateService
         if (!AreRequiredResourcesPresent())
         {
             Logger.Warn("Required resources are missing. Downloading resource package.");
+            Logger.Info($"DownloadFileAsync why {ResourceArchiveUrl}.");
             await DownloadAndInstallResourcesAsync();
         }
     }
@@ -170,10 +174,10 @@ public static class UpdateService
     private static async Task DownloadAndInstallResourcesAsync()
     {
         using var client = CreateHttpClient();
-        var tempRoot = Path.Combine(Path.GetTempPath(), "MikuSB", "resources", Guid.NewGuid().ToString("N"));
+        var tempRoot = Path.Combine(Path.GetTempPath(), ConfigManager.Config.Update.RepositoryName, "resources", Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(tempRoot);
 
-        var resourcePackagePath = Path.Combine(tempRoot, "MikuSB-Resource-main.zip");
+        var resourcePackagePath = Path.Combine(tempRoot, ResourceArchiveName);
         await DownloadFileAsync(client, ResourceArchiveUrl, resourcePackagePath, ResourceDownloadTimeoutSeconds);
         InstallResourcesFromArchive(resourcePackagePath,
             Path.Combine(AppContext.BaseDirectory, ConfigManager.Config.Path.ResourcePath));

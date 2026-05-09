@@ -102,4 +102,5 @@ public sealed class UpdateConfig
     public string RepositoryName { get; set; } = "";
     public string AssetName { get; set; } = "";
     public string ResourceArchiveUrl { get; set; } = "";
+    public string ResourceArchiveName { get; set; } = "";
 }

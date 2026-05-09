@@ -41,6 +41,7 @@
 		"RepositoryOwner": "Weirdo-11",
 		"RepositoryName": "MikuSB",
 		"AssetName": "MikuSB-win-x64.zip",
-		"ResourceArchiveUrl": "https://github.com/Weirdo-11/MikuSB-Resource/archive/refs/heads/02-05-2026.zip"
+		"ResourceArchiveUrl": "https://github.com/Weirdo-11/MikuSB-Resource/archive/refs/heads/02-05-2026.zip",
+		"ResourceArchiveName": "02-05-2026.zip"
 	}
 }
