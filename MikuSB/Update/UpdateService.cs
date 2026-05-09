@@ -88,7 +88,6 @@ public static class UpdateService
 
             var resourcePackagePath = Path.Combine(tempRoot, ResourceArchiveName);
             Logger.Info("Downloading resource package.");
-            Logger.Info($"resourcePackagePath {resourcePackagePath}");
             await DownloadFileAsync(client, ResourceArchiveUrl, resourcePackagePath, ResourceDownloadTimeoutSeconds);
 
             var checksumAsset = release.Assets.FirstOrDefault(x =>
